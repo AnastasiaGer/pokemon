@@ -9,11 +9,10 @@ class Card {
   renderCards(data) {
     let htmlContent ='';
 
-    data.forEach(({id, name, images: {small, large}}) => {
+    data.forEach(({id, name, images: {small}}) => {
       const imgSrc = small;
-      const imgSrcLarge = large;
       htmlContent +=`
-      <li class="comics__item" data-large="${imgSrcLarge}">
+      <li class="comics__item" data-id="${id}">
         <span class="comics__name">${name}</span>
         <img class="comics__img" src=${imgSrc}/>
       </li>
@@ -33,10 +32,10 @@ class Card {
 
   eventListener() {
     document.querySelectorAll('.comics__item').forEach(element => {
-        const uri = element.getAttribute('data-large');
+        const uri = element.getAttribute('data-id');
 
         element.addEventListener('click', () => {
-            Large.render(API_URL)
+            Large.render(uri)
         })
     })
 }
